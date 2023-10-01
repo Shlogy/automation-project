@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 class NumbersValidator {
   /**
    * @param {Number} number number to check
