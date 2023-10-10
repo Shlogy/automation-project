@@ -1,0 +1,17 @@
+{
+  "name": "automation-project-slogar",
+  "version": "1.0.0",
+  "description": "JS course automation",
+  "main": "index.js",
+  "scripts": {
+    "wdio": "wdio run wdio.conf.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@wdio/cli": "^8.17.0",
+    "chromedriver": "117.0.3"
+  }
+}
+
