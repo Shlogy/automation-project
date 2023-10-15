@@ -16,37 +16,33 @@ const { expect, browser, $ } = require('@wdio/globals')
 
 describe("Test suite", () => {
 
-    it("Loading home page of Wikipedia", async () => {
-    await browser.url("https://parabank.parasoft.com/parabank/index.htm");
+    it("Loading home page of the application", async () => {
+    await browser.url("https://the-internet.herokuapp.com/");
     const pageTitle = await browser.getTitle();
 
-    expect(pageTitle).toEqual("ParaBank | Welcome | Online Banking");
+    expect(pageTitle).toEqual("The Internet");
     });
 
     
-    it("Checking that link from navigation works", async() => {
-        await $("//a[text()='Services']").click();
+    it("Navigate to Add/remove Elements page", async() => {
+        await $("//a[text()='Add/Remove Elements']").click();
         
-        const pageTitle = await browser.getTitle();
-        expect(pageTitle).toEqual("ParaBank | Services");
+        const pageUrl = await browser.getUrl();
+        expect(pageUrl).toEqual("https://the-internet.herokuapp.com/add_remove_elements/");
 
     });
     
-    it("Trying to login without entering user info", async() => {
-        await $("input[type='Submit']").click();
-
-        const usernameError = await $("p.error");
-
-        expect(await usernameError.getText()).toEqual("Please enter a username and password.")
+    it("Adding new element and checking if it was added to the page", async() => {
+        await $("//button[text()='Add Element']").click();
+        const addedManuallyButton = $('//button[contains(@class, "added-manually")]');
+        const doesExist = addedManuallyButton.isExisting();
+        expect(doesExist).toBeTruthy();
     });
 
-    it("Trying to login while entering correct user info and checking account value", async() => {
-        await $("input[name='username']").setValue("aa");
-        await $("input[name='password']").setValue("aa");
-        await $("input[type='Submit']").click();
-
-        const accountValue = await $("td.ng-binding");
-
-        expect(await accountValue.getText()).toEqual("$1000,000.00");
+    it("Removing the previously added element", async() => {
+        const addedManuallyButton = $('//button[contains(@class, "added-manually")]');
+        await $("//button[text()='Delete']").click();
+        const doesExist = addedManuallyButton.isExisting();
+        expect(await doesExist).toBeFalsy();
     });
-})
+ })
