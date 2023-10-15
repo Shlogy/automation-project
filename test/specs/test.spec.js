@@ -34,13 +34,13 @@ describe("Test suite", () => {
     
     it("Adding new element and checking if it was added to the page", async() => {
         await $("//button[text()='Add Element']").click();
-        const addedManuallyButton = $('//button[contains(@class, "added-manually")]');
+        const addedManuallyButton = $('button.added-manually');
         const doesExist = addedManuallyButton.isExisting();
         expect(doesExist).toBeTruthy();
     });
 
     it("Removing the previously added element", async() => {
-        const addedManuallyButton = $('//button[contains(@class, "added-manually")]');
+        const addedManuallyButton = $('button.added-manually');
         await $("//button[text()='Delete']").click();
         const doesExist = addedManuallyButton.isExisting();
         expect(await doesExist).toBeFalsy();
