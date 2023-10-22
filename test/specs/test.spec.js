@@ -93,6 +93,7 @@ describe("Test suite task two", () => {
     });
 
 });
+<<<<<<< HEAD
 
 describe("Test suite task three", () => {
 
